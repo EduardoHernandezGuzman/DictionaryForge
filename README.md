@@ -1,0 +1,1 @@
+Generador avanzado de diccionarios de contraseñas personalizado
