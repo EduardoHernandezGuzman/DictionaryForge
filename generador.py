@@ -2,7 +2,8 @@ import sys
 import time
 import os
 
-# Colores
+passwords_generadas = 0
+
 yellow = "\033[93m"
 green = "\033[92m"
 cyan = "\033[96m"
@@ -12,12 +13,13 @@ b = "\033[1m"
 reset = "\033[0m"
 
 
-def print_progress_bar(progress):
-    bar_length = 20
+def print_progress_bar(progress, passwords):
+    bar_length = 30  # Barra más larga
     filled_length = int(bar_length * progress / 100)
     bar = "█" * filled_length + "░" * (bar_length - filled_length)
-    print(f"\r{green}[{bar}] {progress}%{reset}", end="", flush=True)
-    time.sleep(0.4)
+    print(f"\r{green}[{bar}] {progress}%{reset} | {cyan}Contraseñas generadas: {passwords}{reset}", end="", flush=True)
+    time.sleep(0.2)  # Reducido el tiempo de espera
+
 
 
 def print_stats(total, tiempo, nombre):
@@ -158,34 +160,94 @@ class Diccionario:
         return self.archivo
 
     def escribe(self, clave):
+        global passwords_generadas
         archivo = self.archivo
         if len(clave) > 0:
             k = False
             claveNumerica = self.vocales(clave)
             for j in range(2):
                 archivo.write(clave + "\n")
+                passwords_generadas += 1
+                
                 archivo.write(self.mayus(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
+                archivo.write(self.mayus(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pmayus(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.umayus(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pumayus(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                 archivo.write(self.guionbajo(clave) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.mayus(self.guionbajo(clave)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pmayus(self.guionbajo(clave)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.umayus(self.guionbajo(clave)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pumayus(self.guionbajo(clave)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                 archivo.write(claveNumerica + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.mayus(claveNumerica) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pmayus(claveNumerica) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.umayus(claveNumerica) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pumayus(claveNumerica) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                 archivo.write(self.guionbajo(self.guionbajo(claveNumerica)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.mayus(self.guionbajo(claveNumerica)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pmayus(self.guionbajo(claveNumerica)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.umayus(self.guionbajo(claveNumerica)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                 archivo.write(self.pumayus(self.guionbajo(claveNumerica)) + "\n")
+                passwords_generadas += 1
+                print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                 if k != True:
                     clave = clave + "A"
@@ -203,48 +265,44 @@ class Diccionario:
                         k = False
                         for j in range(2):
                             archivo.write(clave + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.mayus(clave) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.pmayus(clave) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.umayus(clave) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.pumayus(clave) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
-                            archivo.write(clave + n + "\n")
+                            archivo.write(self.guionbajo(clave) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.mayus(self.guionbajo(clave)) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.pmayus(self.guionbajo(clave)) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                             archivo.write(self.umayus(self.guionbajo(clave)) + n + "\n")
-                            archivo.write(
-                                self.pumayus(self.guionbajo(clave)) + n + "\n"
-                            )
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
-                            archivo.write(self.vocales(clave) + n + "\n")
-                            archivo.write(self.mayus(self.vocales(clave)) + n + "\n")
-                            archivo.write(self.pmayus(self.vocales(clave)) + n + "\n")
-                            archivo.write(self.umayus(self.vocales(clave)) + n + "\n")
-                            archivo.write(self.pumayus(self.vocales(clave)) + n + "\n")
-
-                            archivo.write(
-                                self.vocales(self.guionbajo(clave)) + n + "\n"
-                            )
-                            archivo.write(
-                                self.mayus(self.vocales(self.guionbajo(clave)))
-                                + n
-                                + "\n"
-                            )
-                            archivo.write(
-                                self.pmayus(self.vocales(self.guionbajo(clave)))
-                                + n
-                                + "\n"
-                            )
-                            archivo.write(
-                                self.umayus(self.vocales(self.guionbajo(clave)))
-                                + n
-                                + "\n"
-                            )
-                            archivo.write(
-                                self.pumayus(self.vocales(self.guionbajo(clave)))
-                                + n
-                                + "\n"
-                            )
+                            archivo.write(self.pumayus(self.guionbajo(clave)) + n + "\n")
+                            passwords_generadas += 1
+                            print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                             if k != True:
                                 n = str(n) + "A"
@@ -252,61 +310,34 @@ class Diccionario:
 
                         n = n[:-1]
                         k = False
+
                     for j in range(2):
                         archivo.write(clave + str(n) + "\n")
+                        passwords_generadas += 1
+                        print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                         archivo.write(self.mayus(clave) + str(n) + "\n")
+                        passwords_generadas += 1
+                        print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                         archivo.write(self.pmayus(clave) + str(n) + "\n")
+                        passwords_generadas += 1
+                        print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                         archivo.write(self.umayus(clave) + str(n) + "\n")
+                        passwords_generadas += 1
+                        print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
+
                         archivo.write(self.pumayus(clave) + str(n) + "\n")
-
-                        archivo.write(self.guionbajo(clave) + str(n) + "\n")
-                        archivo.write(self.mayus(self.guionbajo(clave)) + str(n) + "\n")
-                        archivo.write(
-                            self.pmayus(self.guionbajo(clave)) + str(n) + "\n"
-                        )
-                        archivo.write(
-                            self.umayus(self.guionbajo(clave)) + str(n) + "\n"
-                        )
-                        archivo.write(
-                            self.pumayus(self.guionbajo(clave)) + str(n) + "\n"
-                        )
-
-                        archivo.write(self.vocales(clave) + str(n) + "\n")
-                        archivo.write(self.mayus(self.vocales(clave)) + str(n) + "\n")
-                        archivo.write(self.pmayus(self.vocales(clave)) + str(n) + "\n")
-                        archivo.write(self.umayus(self.vocales(clave)) + str(n) + "\n")
-                        archivo.write(self.pumayus(self.vocales(clave)) + str(n) + "\n")
-
-                        archivo.write(
-                            self.vocales(self.guionbajo(clave)) + str(n) + "\n"
-                        )
-                        archivo.write(
-                            self.mayus(self.vocales(self.guionbajo(clave)))
-                            + str(n)
-                            + "\n"
-                        )
-                        archivo.write(
-                            self.pmayus(self.vocales(self.guionbajo(clave)))
-                            + str(n)
-                            + "\n"
-                        )
-                        archivo.write(
-                            self.umayus(self.vocales(self.guionbajo(clave)))
-                            + str(n)
-                            + "\n"
-                        )
-                        archivo.write(
-                            self.pumayus(self.vocales(self.guionbajo(clave)))
-                            + str(n)
-                            + "\n"
-                        )
+                        passwords_generadas += 1
+                        print(f"\r{cyan}Contraseñas generadas: {passwords_generadas}{reset}", end="", flush=True)
 
                         if k != True:
                             n = str(n) + "A"
                             k = True
 
                     n = n[:-1]
-                    k = False
+                    k = False    
 
     def simple(self):
         for i in range(3):
@@ -457,19 +488,21 @@ try:
         sys.argv[1], sys.argv[2], sys.argv[3], numeros, conjun, time.strftime("%c")
     )
     print(cyan + "Generando tu diccionario..." + reset)
+    print("\n")  # Añade un espacio
     dicc.simple()
-    print_progress_bar(13)
+    print_progress_bar(13, passwords_generadas)
     dicc.plano()
-    print_progress_bar(31)
+    print_progress_bar(31, passwords_generadas)
     dicc.inverso()
-    print_progress_bar(49)
+    print_progress_bar(49, passwords_generadas)
     dicc.silabas()
-    print_progress_bar(75)
+    print_progress_bar(75, passwords_generadas)
     dicc.conjuncion()
-    print_progress_bar(100)
+    print_progress_bar(90, passwords_generadas)
     dicc.juntar()
-    print("\n")
-    print(green + "\n\n\a¡Diccionario creado!" + reset)
+    print_progress_bar(100, passwords_generadas)
+    print("\n\n")  # Añade espacios
+    print(green + "¡Diccionario creado!" + reset)
     fin = time.time()
     tiempo_total = fin - comienzo
     total_passwords = dicc.contar()
